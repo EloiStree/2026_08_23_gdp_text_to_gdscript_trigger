@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://d3ykaogm3rbfa"]
+
+[ext_resource type="Script" uid="uid://d0yr0gpmjn4w" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_pre_load_gdscript_in_user_folder.gd" id="1_5i36y"]
+[ext_resource type="Script" uid="uid://p8cvxi8epok4" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_filter_gdscript_by_relative_path.gd" id="2_8jmco"]
+[ext_resource type="Script" uid="uid://kgsyxaprqgv7" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_create_gdscript_node_from_resource_path.gd" id="3_gqdcj"]
+[ext_resource type="Script" uid="uid://cj57f82ki0ovm" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_kill_node_holder_after_life_time_out.gd" id="4_ysfhv"]
+
+[node name="Demo2dVboxPreLoadGdscript" type="Control" unique_id=1314695415]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Pre Load Gd Script" type="Node" parent="." unique_id=1097395104 node_paths=PackedStringArray("_node_listeners")]
+script = ExtResource("1_5i36y")
+_node_listeners = [NodePath("Filter/At Ready"), NodePath("Filter/At Exit"), NodePath("Filter/At Focus Enter"), NodePath("Filter/At Focus Exit"), NodePath("Filter/Interpeter Shortcut"), NodePath("Filter/Interpeter Command Line")]
+metadata/_custom_type_script = "uid://d0yr0gpmjn4w"
+
+[node name="Filter" type="Node" parent="Pre Load Gd Script" unique_id=956160810]
+
+[node name="At Ready" type="Node" parent="Pre Load Gd Script/Filter" unique_id=617677939]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["at_ready"])
+
+[node name="Create Script" type="Node" parent="Pre Load Gd Script/Filter/At Ready" unique_id=1892065195 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("3_gqdcj")
+_where_to_create_node = NodePath("../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/At Ready" unique_id=1357980262]
+
+[node name="At Exit" type="Node" parent="Pre Load Gd Script/Filter" unique_id=104621948]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["at_exit"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/At Exit" unique_id=218149408]
+
+[node name="At Focus Enter" type="Node" parent="Pre Load Gd Script/Filter" unique_id=2031877788]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["at_focus_enter"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/At Focus Enter" unique_id=649706614]
+
+[node name="At Focus Exit" type="Node" parent="Pre Load Gd Script/Filter" unique_id=1034392880]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["at_focus_exit"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/At Focus Exit" unique_id=1138903608]
+
+[node name="Interpeter Shortcut" type="Node" parent="Pre Load Gd Script/Filter" unique_id=1185030948]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["interpreter_sc"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/Interpeter Shortcut" unique_id=1839005876]
+
+[node name="Interpeter Command Line" type="Node" parent="Pre Load Gd Script/Filter" unique_id=2101447854]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["interpreter_cmd"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/Interpeter Command Line" unique_id=193654854]
+
+[node name="Gate In All" type="Node" parent="Pre Load Gd Script/Filter" unique_id=1890847547]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["gate_in"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/Gate In All" unique_id=901062438]
+
+[node name="Gate Out All" type="Node" parent="Pre Load Gd Script/Filter" unique_id=234250512]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["gate_out"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/Gate Out All" unique_id=133592001]
+
+[node name="Gate Out Alias" type="Node" parent="Pre Load Gd Script/Filter" unique_id=948608586]
+script = ExtResource("2_8jmco")
+_is_equals_to = Array[String](["gate_out_alias"])
+
+[node name="GDScript Holder" type="Node" parent="Pre Load Gd Script/Filter/Gate Out Alias" unique_id=1583033999]
+
+[node name="One Time Script Runner" type="Node" parent="Pre Load Gd Script" unique_id=32597289]
+
+[node name="NodeKiller" type="Node" parent="Pre Load Gd Script/One Time Script Runner" unique_id=970860666]
+script = ExtResource("4_ysfhv")
+
+[connection signal="on_godot_script_found" from="Pre Load Gd Script/Filter/At Ready" to="Pre Load Gd Script/Filter/At Ready/Create Script" method="load_and_run_text_as_godot_script"]
