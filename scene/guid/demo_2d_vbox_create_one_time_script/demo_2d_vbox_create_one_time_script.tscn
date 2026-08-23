@@ -1,9 +1,6 @@
 [gd_scene format=3 uid="uid://dyw6j4dhd3nom"]
 
-[ext_resource type="Script" uid="uid://d0yr0gpmjn4w" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_pre_load_gdscript_in_user_folder.gd" id="1_cahv6"]
-[ext_resource type="Script" uid="uid://cj57f82ki0ovm" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_kill_node_holder_after_life_time_out.gd" id="2_20v4a"]
-[ext_resource type="Script" uid="uid://kgsyxaprqgv7" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_create_gdscript_node_from_resource_path.gd" id="3_c1csg"]
-[ext_resource type="Script" uid="uid://bpbypbbt2vmfs" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_create_one_time_script/script/tmod_emit_gdscript_file_from_name.gd" id="4_20v4a"]
+[ext_resource type="PackedScene" uid="uid://b54th8a1qmnp0" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_create_one_time_script/prefab/prefab_trigger_loaded_gd_script_from_name.tscn" id="1_5wca4"]
 [ext_resource type="Script" uid="uid://coanlqqvdbagf" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/script/tmod_ui_line_edit_with_submit_button.gd" id="5_c1csg"]
 
 [node name="TModKillNodeHolderAfterLifeTimeOut" type="Control" unique_id=2055948347]
@@ -14,23 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Pre Load Gd Script" type="Node" parent="." unique_id=1619992330]
-script = ExtResource("1_cahv6")
-metadata/_custom_type_script = "uid://d0yr0gpmjn4w"
-
-[node name="Trigger GDScript From Name" type="Node" parent="Pre Load Gd Script" unique_id=1607783243]
-script = ExtResource("4_20v4a")
-metadata/_custom_type_script = "uid://bpbypbbt2vmfs"
-
-[node name="Create GDScript" type="Node" parent="Pre Load Gd Script/Trigger GDScript From Name" unique_id=1073153030 node_paths=PackedStringArray("_where_to_create_node")]
-script = ExtResource("3_c1csg")
-_where_to_create_node = NodePath("Created")
-metadata/_custom_type_script = "uid://kgsyxaprqgv7"
-
-[node name="NodeKiller" type="Node" parent="Pre Load Gd Script/Trigger GDScript From Name/Create GDScript" unique_id=1215914298]
-script = ExtResource("2_20v4a")
-
-[node name="Created" type="Node" parent="Pre Load Gd Script/Trigger GDScript From Name/Create GDScript" unique_id=15400377]
+[node name="Trigger Loaded GDScript From Name" parent="." unique_id=1435026660 instance=ExtResource("1_5wca4")]
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1291830595]
 layout_mode = 1
@@ -42,30 +23,45 @@ grow_vertical = 2
 
 [node name="LineEdit" type="LineEdit" parent="VBoxContainer" unique_id=1164706242]
 layout_mode = 2
-text = "good_bye_world.gd"
+text = "hello_world.gd"
 
-[node name="Button" type="Button" parent="VBoxContainer" unique_id=1644686371]
+[node name="Button Reload" type="Button" parent="VBoxContainer" unique_id=1644686371]
 layout_mode = 2
 text = "Reload File"
 
-[node name="TModUiLineEditWithSubmitButton" type="Node" parent="VBoxContainer/Button" unique_id=1135574353 node_paths=PackedStringArray("line_edit", "submit_button")]
+[node name="TModUiLineEditWithSubmitButton" type="Node" parent="VBoxContainer/Button Reload" unique_id=1135574353 node_paths=PackedStringArray("line_edit", "submit_button")]
 script = ExtResource("5_c1csg")
 line_edit = NodePath("../../LineEdit")
 submit_button = NodePath("..")
 metadata/_custom_type_script = "uid://coanlqqvdbagf"
 
-[node name="Button2" type="Button" parent="VBoxContainer" unique_id=658126390]
+[node name="Button Submit" type="Button" parent="VBoxContainer" unique_id=658126390]
 layout_mode = 2
 text = "Run"
 
-[node name="TModUiLineEditWithSubmitButton" type="Node" parent="VBoxContainer/Button2" unique_id=2110608106 node_paths=PackedStringArray("line_edit", "submit_button")]
+[node name="TModUiLineEditWithSubmitButton" type="Node" parent="VBoxContainer/Button Submit" unique_id=2110608106 node_paths=PackedStringArray("line_edit", "submit_button")]
 script = ExtResource("5_c1csg")
 line_edit = NodePath("../../LineEdit")
 submit_button = NodePath("..")
 metadata/_custom_type_script = "uid://coanlqqvdbagf"
 
-[connection signal="on_godot_script_found" from="Pre Load Gd Script" to="Pre Load Gd Script/Trigger GDScript From Name" method="append_godot_script_resource"]
-[connection signal="on_request_to_process_gdscript_resource" from="Pre Load Gd Script/Trigger GDScript From Name" to="Pre Load Gd Script/Trigger GDScript From Name/Create GDScript" method="load_and_run_text_as_godot_script"]
-[connection signal="on_created_node" from="Pre Load Gd Script/Trigger GDScript From Name/Create GDScript" to="Pre Load Gd Script/Trigger GDScript From Name/Create GDScript/NodeKiller" method="kill_with_inspector_time"]
-[connection signal="on_submit_button_pressed" from="VBoxContainer/Button/TModUiLineEditWithSubmitButton" to="Pre Load Gd Script/Trigger GDScript From Name" method="reload_file_script_per_file_name"]
-[connection signal="on_submit_button_pressed" from="VBoxContainer/Button2/TModUiLineEditWithSubmitButton" to="Pre Load Gd Script/Trigger GDScript From Name" method="emit_godot_script_resource_from_file_name"]
+[node name="Label Found Title" type="Label" parent="VBoxContainer" unique_id=1930054019]
+layout_mode = 2
+text = "Found"
+
+[node name="Label Found Name" type="Label" parent="VBoxContainer" unique_id=1369243503]
+layout_mode = 2
+text = "-"
+
+[node name="Label Not Found Title" type="Label" parent="VBoxContainer" unique_id=1864295268]
+layout_mode = 2
+text = "Not Found"
+
+[node name="Label Not Found Name" type="Label" parent="VBoxContainer" unique_id=1903545789]
+layout_mode = 2
+text = "-"
+
+[connection signal="on_submit_button_pressed" from="VBoxContainer/Button Reload/TModUiLineEditWithSubmitButton" to="Trigger Loaded GDScript From Name/Trigger GDScript From Name" method="reload_file_script_per_file_name"]
+[connection signal="on_submit_button_pressed" from="VBoxContainer/Button Submit/TModUiLineEditWithSubmitButton" to="Trigger Loaded GDScript From Name/Trigger GDScript From Name" method="emit_godot_script_resource_from_file_name"]
+
+[editable path="Trigger Loaded GDScript From Name"]

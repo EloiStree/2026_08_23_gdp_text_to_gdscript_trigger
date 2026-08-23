@@ -39,10 +39,6 @@ func load_and_run_text_as_godot_script(script_resource:TModResourceGdScriptFile)
 	node.set_process(_allows_process)
 	node.set_physics_process(_allows_physics_process)
 
-	if _where_to_create_node:
-		_where_to_create_node.add_child(node)
-	else:
-		add_child(node)
 		
 	on_created_node.emit(node)
 	on_created_node_with_resource.emit(node, script_resource)
@@ -50,4 +46,8 @@ func load_and_run_text_as_godot_script(script_resource:TModResourceGdScriptFile)
 	var holder: TModCreatedGDScriptNodeWithResourceHolder = TModCreatedGDScriptNodeWithResourceHolder.new()
 	holder.set_holding_resource(script_resource)
 	holder.set_holding_node_and_parent_it(node)
+	if _where_to_create_node:
+		_where_to_create_node.add_child(holder)
+	else:
+		add_child(holder)
 	on_created_holding_node_with_resource.emit(holder)

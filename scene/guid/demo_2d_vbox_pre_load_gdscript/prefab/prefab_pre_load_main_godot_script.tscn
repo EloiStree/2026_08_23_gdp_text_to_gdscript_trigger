@@ -1,0 +1,172 @@
+[gd_scene format=3 uid="uid://rsv4d5v2tgli"]
+
+[ext_resource type="Script" uid="uid://d0yr0gpmjn4w" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_pre_load_gdscript_in_user_folder.gd" id="1_s7yt7"]
+[ext_resource type="Script" uid="uid://p8cvxi8epok4" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_filter_gdscript_by_relative_path.gd" id="2_dkfsj"]
+[ext_resource type="Script" uid="uid://01buevjjnaga" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_emit_in_out_godot_event.gd" id="3_weu7a"]
+[ext_resource type="Script" uid="uid://bj83868r3rkva" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_godot_script_group_holder.gd" id="4_vag32"]
+[ext_resource type="Script" uid="uid://kgsyxaprqgv7" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_create_gdscript_node_from_resource_path.gd" id="5_qbidw"]
+
+[node name="Pre Load Main Godot Script" type="Node" unique_id=1235941472 node_paths=PackedStringArray("_node_listeners")]
+script = ExtResource("1_s7yt7")
+_node_listeners = [NodePath("Filter/At Ready"), NodePath("Filter/At Exit"), NodePath("Filter/At Focus Enter"), NodePath("Filter/At Focus Exit"), NodePath("Filter/Interpeter Shortcut"), NodePath("Filter/Interpeter Command Line"), NodePath("Filter/Gate In All"), NodePath("Filter/Gate Out All"), NodePath("Filter/Gate Out Alias")]
+metadata/_custom_type_script = "uid://d0yr0gpmjn4w"
+
+[node name="Filter" type="Node" parent="." unique_id=608611147]
+
+[node name="At Ready" type="Node" parent="Filter" unique_id=1995675057]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["at_ready"])
+
+[node name="GodotEvent" type="Node" parent="Filter/At Ready" unique_id=270895292]
+script = ExtResource("3_weu7a")
+metadata/_custom_type_script = "uid://01buevjjnaga"
+
+[node name="GDScript Group" type="Node" parent="Filter/At Ready" unique_id=6152740]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Timer" type="Timer" parent="Filter/At Ready/GDScript Group" unique_id=1076720224]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[node name="Create Script" type="Node" parent="Filter/At Ready" unique_id=839770696 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/At Ready" unique_id=1751299089]
+
+[node name="At Exit" type="Node" parent="Filter" unique_id=907239041]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["at_exit"])
+
+[node name="GodotEvent" type="Node" parent="Filter/At Exit" unique_id=1293015761]
+script = ExtResource("3_weu7a")
+metadata/_custom_type_script = "uid://01buevjjnaga"
+
+[node name="GDScript Group" type="Node" parent="Filter/At Exit" unique_id=1898867353]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Create Script" type="Node" parent="Filter/At Exit/GDScript Group" unique_id=585577005 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/At Exit" unique_id=929326133]
+
+[node name="At Focus Enter" type="Node" parent="Filter" unique_id=130478201]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["at_focus_enter"])
+
+[node name="GodotEvent" type="Node" parent="Filter/At Focus Enter" unique_id=741471378]
+script = ExtResource("3_weu7a")
+metadata/_custom_type_script = "uid://01buevjjnaga"
+
+[node name="GDScript Group" type="Node" parent="Filter/At Focus Enter" unique_id=1167374418]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Create Script" type="Node" parent="Filter/At Focus Enter/GDScript Group" unique_id=676704542 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/At Focus Enter" unique_id=447071228]
+
+[node name="At Focus Exit" type="Node" parent="Filter" unique_id=366062221]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["at_focus_exit"])
+
+[node name="GodotEvent" type="Node" parent="Filter/At Focus Exit" unique_id=695255374]
+script = ExtResource("3_weu7a")
+metadata/_custom_type_script = "uid://01buevjjnaga"
+
+[node name="GDScript Group" type="Node" parent="Filter/At Focus Exit" unique_id=1925886295]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Create Script" type="Node" parent="Filter/At Focus Exit/GDScript Group" unique_id=522566494 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/At Focus Exit" unique_id=1879863059]
+
+[node name="Interpeter Shortcut" type="Node" parent="Filter" unique_id=137611073]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["interpreter_sc"])
+
+[node name="GDScript Group" type="Node" parent="Filter/Interpeter Shortcut" unique_id=298445718]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Create Script" type="Node" parent="Filter/Interpeter Shortcut/GDScript Group" unique_id=1505953735 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/Interpeter Shortcut" unique_id=1825605323]
+
+[node name="Interpeter Command Line" type="Node" parent="Filter" unique_id=762883502]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["interpreter_cmd"])
+
+[node name="GDScript Group" type="Node" parent="Filter/Interpeter Command Line" unique_id=1789861970]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="Create Script" type="Node" parent="Filter/Interpeter Command Line/GDScript Group" unique_id=377108672 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("5_qbidw")
+_where_to_create_node = NodePath("../../GDScript Holder")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="GDScript Holder" type="Node" parent="Filter/Interpeter Command Line" unique_id=782100509]
+
+[node name="Gate In All" type="Node" parent="Filter" unique_id=1568876316]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["gate_in"])
+
+[node name="GDScript Group" type="Node" parent="Filter/Gate In All" unique_id=1630993555]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="GDScript Holder" type="Node" parent="Filter/Gate In All" unique_id=933159278]
+
+[node name="Gate Out All" type="Node" parent="Filter" unique_id=400164045]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["gate_out"])
+
+[node name="GDScript Group" type="Node" parent="Filter/Gate Out All" unique_id=2135333818]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="GDScript Holder" type="Node" parent="Filter/Gate Out All" unique_id=690320271]
+
+[node name="Gate Out Alias" type="Node" parent="Filter" unique_id=718366466]
+script = ExtResource("2_dkfsj")
+_is_equals_to = Array[String](["gate_out_alias"])
+
+[node name="GDScript Group" type="Node" parent="Filter/Gate Out Alias" unique_id=740623512]
+script = ExtResource("4_vag32")
+metadata/_custom_type_script = "uid://bj83868r3rkva"
+
+[node name="GDScript Holder" type="Node" parent="Filter/Gate Out Alias" unique_id=1276772908]
+
+[connection signal="on_godot_script_found" from="Filter/At Ready" to="Filter/At Ready/GDScript Group" method="append_godot_script"]
+[connection signal="on_emit_stored_godot_script" from="Filter/At Ready/GDScript Group" to="Filter/At Ready/Create Script" method="load_and_run_text_as_godot_script"]
+[connection signal="timeout" from="Filter/At Ready/GDScript Group/Timer" to="Filter/At Ready/GDScript Group" method="trigger_stored_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/At Exit" to="Filter/At Exit/GDScript Group" method="append_godot_script"]
+[connection signal="on_application_quit_event" from="Filter/At Exit/GodotEvent" to="Filter/At Exit/GDScript Group" method="trigger_stored_godot_script"]
+[connection signal="on_emit_stored_godot_script" from="Filter/At Exit/GDScript Group" to="Filter/At Exit/GDScript Group/Create Script" method="load_and_run_text_as_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/At Focus Enter" to="Filter/At Focus Enter/GDScript Group" method="append_godot_script"]
+[connection signal="on_application_win_focus_event" from="Filter/At Focus Enter/GodotEvent" to="Filter/At Focus Enter/GDScript Group" method="trigger_stored_godot_script"]
+[connection signal="on_emit_stored_godot_script" from="Filter/At Focus Enter/GDScript Group" to="Filter/At Focus Enter/GDScript Group/Create Script" method="load_and_run_text_as_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/At Focus Exit" to="Filter/At Focus Exit/GDScript Group" method="append_godot_script"]
+[connection signal="on_application_lost_focus_event" from="Filter/At Focus Exit/GodotEvent" to="Filter/At Focus Exit/GDScript Group" method="trigger_stored_godot_script"]
+[connection signal="on_emit_stored_godot_script" from="Filter/At Focus Exit/GDScript Group" to="Filter/At Focus Exit/GDScript Group/Create Script" method="load_and_run_text_as_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/Interpeter Shortcut" to="Filter/Interpeter Shortcut/GDScript Group" method="append_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/Interpeter Shortcut" to="Filter/Interpeter Shortcut/GDScript Group/Create Script" method="load_and_run_text_as_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/Interpeter Command Line" to="Filter/Interpeter Command Line/GDScript Group" method="append_godot_script"]
+[connection signal="on_godot_script_found" from="Filter/Interpeter Command Line" to="Filter/Interpeter Command Line/GDScript Group/Create Script" method="load_and_run_text_as_godot_script"]

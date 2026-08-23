@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b54th8a1qmnp0"]
+
+[ext_resource type="Script" uid="uid://d0yr0gpmjn4w" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_pre_load_gdscript_in_user_folder.gd" id="1_suucj"]
+[ext_resource type="Script" uid="uid://bpbypbbt2vmfs" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_create_one_time_script/script/tmod_emit_gdscript_file_from_name.gd" id="2_3uerq"]
+[ext_resource type="Script" uid="uid://kgsyxaprqgv7" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_create_gdscript_node_from_resource_path.gd" id="3_25dd7"]
+[ext_resource type="Script" uid="uid://cj57f82ki0ovm" path="res://addons/2026_08_23_gdp_text_to_gdscript_trigger/scene/guid/demo_2d_vbox_pre_load_gdscript/script/tmod_kill_node_holder_after_life_time_out.gd" id="4_d8m8f"]
+
+[node name="Trigger Loaded GDScript From Name" type="Node" unique_id=1435026660]
+script = ExtResource("1_suucj")
+metadata/_custom_type_script = "uid://d0yr0gpmjn4w"
+
+[node name="Trigger GDScript From Name" type="Node" parent="." unique_id=407091158]
+script = ExtResource("2_3uerq")
+metadata/_custom_type_script = "uid://bpbypbbt2vmfs"
+
+[node name="Create GDScript" type="Node" parent="Trigger GDScript From Name" unique_id=749419322 node_paths=PackedStringArray("_where_to_create_node")]
+script = ExtResource("3_25dd7")
+_where_to_create_node = NodePath("Created")
+metadata/_custom_type_script = "uid://kgsyxaprqgv7"
+
+[node name="NodeKiller" type="Node" parent="Trigger GDScript From Name/Create GDScript" unique_id=669032577]
+script = ExtResource("4_d8m8f")
+
+[node name="Created" type="Node" parent="Trigger GDScript From Name/Create GDScript" unique_id=805150885]
+
+[connection signal="on_godot_script_found" from="." to="Trigger GDScript From Name" method="append_godot_script_resource"]
+[connection signal="on_request_to_process_gdscript_resource" from="Trigger GDScript From Name" to="Trigger GDScript From Name/Create GDScript" method="load_and_run_text_as_godot_script"]
+[connection signal="on_created_node" from="Trigger GDScript From Name/Create GDScript" to="Trigger GDScript From Name/Create GDScript/NodeKiller" method="kill_with_inspector_time"]

@@ -3,7 +3,8 @@ extends TModAbstractCanReceiveGodotScriptResource
 
 
 signal on_request_to_process_gdscript_resource(script_resource:TModResourceGdScriptFile)
-signal on_fail_to_find_gdscript_resource(script_name:String)
+signal on_fail_to_find_gdscript_resource_name(script_name:String)
+signal on_succeed_to_find_gdscript_resource_name(script_name:String)
 @export var array_of_gdscript_resources: Array[TModResourceGdScriptFile] = []
 
 func clear() -> void:
@@ -31,17 +32,20 @@ func search_for_resource_by_name(script_name:String)->Array[TModResourceGdScript
 func reload_file_script_per_file_name(script_name:String):
 	var found_resources: Array[TModResourceGdScriptFile] = search_for_resource_by_name(script_name)
 	if found_resources.size() == 0:
-		on_fail_to_find_gdscript_resource.emit(script_name)
+		on_fail_to_find_gdscript_resource_name.emit(script_name)
 		return
+	on_succeed_to_find_gdscript_resource_name.emit(script_name)
 	for script_resource in found_resources:
 		script_resource.force_reload_script_file()
 
 func emit_godot_script_resource_from_file_name(script_name: String) -> void:
 	var found_resources: Array[TModResourceGdScriptFile] = search_for_resource_by_name(script_name)
 	if found_resources.size() == 0:
-		on_fail_to_find_gdscript_resource.emit(script_name)
+		on_fail_to_find_gdscript_resource_name.emit(script_name)
 		return
+	on_succeed_to_find_gdscript_resource_name.emit(script_name)
+
 	for script_resource in found_resources:
 		on_request_to_process_gdscript_resource.emit(script_resource)
-
+	
 	
