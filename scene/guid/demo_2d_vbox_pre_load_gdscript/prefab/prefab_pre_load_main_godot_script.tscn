@@ -15,6 +15,7 @@ metadata/_custom_type_script = "uid://d0yr0gpmjn4w"
 
 [node name="At Ready" type="Node" parent="Filter" unique_id=1995675057]
 script = ExtResource("2_dkfsj")
+_contains_white_list = Array[String](["at_ready"])
 _is_equals_to = Array[String](["at_ready"])
 
 [node name="GodotEvent" type="Node" parent="Filter/At Ready" unique_id=270895292]

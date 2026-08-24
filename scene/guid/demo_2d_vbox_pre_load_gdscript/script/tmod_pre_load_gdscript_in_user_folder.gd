@@ -6,8 +6,8 @@ extends Node
 signal on_godot_script_found( script_found : TModResourceGdScriptFile)
 
 
-@export var _user_folder_path: String = "user://modding/gdscript"
-@export var _res_folder_path: String = "res://modding/gdscript"
+@export var _user_folder_path: String = "user://data/config/modding/gdscript"
+@export var _res_folder_path: String = "res://data/config/modding/gdscript"
 
 @export var _create_folder_if_not_existing: Array[String] = [
 	"at_ready",
@@ -124,10 +124,19 @@ func _scan_directory_recursive(folder_path: String) -> void:
 
 func created_folder_if_not_exists(folder_path: String) -> void:
 	if folder_path.begins_with("user://"):
-		folder_path = folder_path.replace("user://", OS.get_user_data_dir() + "/")
-	if folder_path.begins_with("res://"):
-		folder_path = folder_path.replace("res://", ProjectSettings.globalize_path("res://"))
+		folder_path = turn_godot_path_to_absolute_path(folder_path)
+		if not DirAccess.dir_exists_absolute(folder_path):
+			DirAccess.make_dir_recursive_absolute(folder_path)
+		return 
+		
+	if not Engine.is_editor_hint():
+		if folder_path.begins_with("res://"):
+			folder_path = turn_godot_path_to_absolute_path(folder_path)
+		if not DirAccess.dir_exists_absolute(folder_path):
+			DirAccess.make_dir_recursive_absolute(folder_path)
+		return 
+	
+	if not DirAccess.dir_exists_absolute(folder_path):
+			DirAccess.make_dir_recursive_absolute(folder_path)
 
 	## check the absolute path
-	if not DirAccess.dir_exists_absolute(folder_path):
-		DirAccess.make_dir_recursive_absolute(folder_path)
