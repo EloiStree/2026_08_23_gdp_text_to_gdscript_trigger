@@ -140,3 +140,7 @@ func created_folder_if_not_exists(folder_path: String) -> void:
 			DirAccess.make_dir_recursive_absolute(folder_path)
 
 	## check the absolute path
+
+
+func _on_input_text_dictionary_true_false_value_to_actions_on_action_found(action_name: String) -> void:
+	pass # Replace with function body.
